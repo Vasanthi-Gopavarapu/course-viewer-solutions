@@ -4,10 +4,23 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import addCourseReducer from './reducers/addCourseReducer'
+
+ const defaultState = {
+  value: "React",
+  items: ["React"]
+}
+
+const store = createStore(addCourseReducer,defaultState);
+
 ReactDOM.render(
-  <React.StrictMode>
+ //<React.StrictMode>
+  <Provider store={store} >
     <App />
-  </React.StrictMode>,
+  </Provider>,
+ //</React.StrictMode>,
   document.getElementById('root')
 );
 
@@ -15,3 +28,6 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+
+export default defaultState;

@@ -1,70 +1,39 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
+import addCourse from './actions/addCourse';
 
-class Courses extends React.Component {
-    constructor(props) {
-        super(props);
-        if(this.state === undefined || this.state === null)
-        {
-             this.state = {
-                value: '',
-                items: []
-             };
-        }
-             console.log("constructor", this.state);
-        
-        
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
 
-    async handleChange(e) {
-        console.log("handlechange initial state", this.state);
-         await this.setState({value: e.target.value});
-        console.log(this.state);
-    }
 
-    async handleSubmit(e) {
-        e.preventDefault();
-        console.log("before", this.state);
-        
-        await this.setState(state => {
-             const items = state.items.concat(state.value);
-
-             return {
-                 items,
-                 value:''
-             }
-        });
-        console.log("after", this.state);
-    }
-
- render(){
-     console.log("render");
-     //const items = this.state.items;
+const Courses = (props) => {
+    let courseName, courseForm;
+     
       return (
-        <div className="container p-5 my-3 bg-light">
-          <h1>Courses</h1>
-          <Addedcourses items={this.state.items}/>
-          <h2>Add Courses</h2>
-          <form onSubmit={this.handleSubmit}>
-                <div className="form-group">
-                <label>
-                <input type="text" value={this.state.value} onChange={this.handleChange} />
-                </label>
-                <input type="submit" value="Save" />
-              </div>
-           </form>
-     </div> 
-      );
- }
-      
+            <div className="container p-5 my-3 bg-light">
+              <h1>Courses</h1>
+              <Addedcourses items={props.items}/>
+              <h2>Add Courses</h2>
+              <form ref={node => (courseForm= node)} onSubmit={ (e) => {
+                   e.preventDefault();
+                   props.addCourse(courseName.value);
+                   courseForm.reset();
+                    }                 
+                }>
+                    <div className="form-group">
+                    <label>
+                    <input type="text" ref={node => (courseName= node)} placeholder=""/>
+                    </label>
+                    <input type="submit" value="Save" />
+                  </div>
+               </form>
+         </div> 
+        );
+   
 }
 
-
 function Addedcourses(props) {
-    
+
     const items = props.items
     if(items.length > 0)
     {
@@ -83,6 +52,18 @@ function Addedcourses(props) {
     
 }
 
+const mapStateToProps = (state) => {   
+        return {
+            value: state.value,
+            items: state.items
+        }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+            addCourse: text => dispatch(addCourse(text))
+    })
+
+export default connect(mapStateToProps, mapDispatchToProps)(Courses);
 
 
-export default Courses;
+
