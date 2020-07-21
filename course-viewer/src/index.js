@@ -5,15 +5,16 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import addCourseReducer from './reducers/addCourseReducer'
+import { createStore, applyMiddleware } from 'redux';
+import addCourseReducer from './reducers/addCourseReducer';
+import thunk from 'redux-thunk';
 
  const defaultState = {
-  value: "React",
-  items: ["React"]
+  value: "",
+  items: []
 }
 
-const store = createStore(addCourseReducer,defaultState);
+const store = createStore(addCourseReducer,defaultState,applyMiddleware(thunk));
 
 ReactDOM.render(
  //<React.StrictMode>
