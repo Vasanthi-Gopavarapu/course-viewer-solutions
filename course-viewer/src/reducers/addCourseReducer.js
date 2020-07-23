@@ -4,8 +4,17 @@ import defaultState from '../index';
 export default function addCourseReducer(state = defaultState, action){
     if(action.type === 'ADD_COURSE')
     {
-        const obj = action.text;
-        const items = obj.map((item,i) => item.title);
+        let items = action.data;
+         /*let author = items.filter(item => {
+            for(let i=0; i < authors.length; i++){
+                if(item.data.authorId === authors[i].id) {
+                    item.data.authorId = authors[i].name;
+                    break;
+                }
+            }
+            return items;
+        })*/
+        
         console.log(items);
         return {...state, value:"", items};
            

@@ -8,6 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Home from './Home';
 import Courses from './Courses';
 import About from './About';
+import Addcourse from './Addcourse';
 
 
 function App() {
@@ -38,6 +39,9 @@ function App() {
           </Route>
           <Route path="/about">
             <About />
+          </Route>
+          <Route path="/course">
+            <Addcourse />
           </Route>
           <Route path="*">
             <Pagenotfound />

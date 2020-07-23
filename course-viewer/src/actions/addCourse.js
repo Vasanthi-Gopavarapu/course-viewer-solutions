@@ -1,10 +1,10 @@
 
 
-const addCourse = (text) => {
+const addCourse = (data) => {
    return {
     type:'ADD_COURSE',
-    text
-   };
+    data
+  };
 }
 
 export default addCourse;

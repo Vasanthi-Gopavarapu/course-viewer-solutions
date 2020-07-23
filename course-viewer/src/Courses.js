@@ -4,6 +4,8 @@ import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import addCourse from './actions/addCourse';
 import { getCourses } from './api/courseApi';
+import { getAuthors } from './api/authorApi';
+import { NavLink } from 'react-router-dom';
 
 class Courses extends React.Component {
     constructor(props){
@@ -15,20 +17,46 @@ class Courses extends React.Component {
     }
 
     renderCourse = async () => {
-        let promise = getCourses();
-        let obj = await promise.then(data => data)
-        console.log(obj);
-        return this.props.addCourse(obj);
+        let coursePromise = getCourses();
+        let authorPromise = getAuthors();
+        let obj = await coursePromise.then(data => data)
+        let author = await authorPromise.then(data => data);
+        let data = obj.filter(item => {
+            for(let i=0; i < author.length; i++){
+                if(item.authorId === author[i].id) {
+                    item.authorId = author[i].name;
+                    break;
+                }
+            }
+            return item;
+        })
+        console.log(data); 
+        return this.props.addCourse(data);
     }
          render() {
-             //let resp = this.renderCourse();
-             //console.log(resp);
-            return (
-                <div className="container p-5 my-3 bg-light">
+             return (
+                <div>
                   <h1>Courses</h1>
-                  <ul>
-                      <View items={this.props.items}></View>
-                  </ul>
+                  <p><NavLink to="/course" className="text-primary"
+                                activeClassName="text-danger">
+                        <button type="button" className="btn btn-primary">
+                            Add Course
+                        </button>
+                    </NavLink>
+                </p>
+                  <table className="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Category</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <View items={this.props.items}></View>
+                    </tbody>
+                    </table>
                </div> 
             );
        
@@ -40,7 +68,13 @@ function View(props) {
     let items = props.items;
     const course = items.map((item,i) => {
         return (
-            <li key={i}>{item}</li>
+            <tr key={item.id}>
+                <td><span className="badge badge-light">Watch</span></td>
+                <td className="text-primary" >{item.title}</td>
+                <td>{item.authorId}</td>
+                <td>{item.category}</td>
+            </tr>
+            
         );
     }
     );
@@ -48,28 +82,6 @@ function View(props) {
 }
    
 
- /*function Addedcourses(props) {
-    const course = getCourses();
-    console.log(course);
-    const list = course.then(data => data);
-    console.log(list);
-    const items = props.items
-    if(items.length > 0)
-    {
-    const listItems = items.map((item, index) => 
-    <li key={index}> {item} </li>
-    );
-    return (
-        <ul>
-            {listItems}
-        </ul>
-        );
-
-    }
-
-    return null;
-    
-}*/
 
 const mapStateToProps = (state) => {   
         return {
