@@ -10,8 +10,9 @@ import addCourseReducer from './reducers/addCourseReducer';
 import thunk from 'redux-thunk';
 
  const defaultState = {
-  value: "",
-  items: []
+  authors: [],
+  items: [],
+  newCourse: []
 }
 
 const store = createStore(addCourseReducer,defaultState,applyMiddleware(thunk));

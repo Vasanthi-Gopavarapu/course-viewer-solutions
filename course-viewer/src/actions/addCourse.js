@@ -1,10 +1,15 @@
 
 
-const addCourse = (data) => {
+export const addCourse = (data) => {
    return {
     type:'ADD_COURSE',
     data
   };
 }
 
-export default addCourse;
+export const viewCourses = (data) => {
+  return {
+    type: 'VIEW_COURSES',
+    data
+  };
+}

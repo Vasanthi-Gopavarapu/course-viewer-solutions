@@ -2,16 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import addCourse from './actions/addCourse';
+import { viewCourses, addCourse } from './actions/addCourse';
 import { getCourses } from './api/courseApi';
 import { getAuthors } from './api/authorApi';
 import { NavLink } from 'react-router-dom';
 
 class Courses extends React.Component {
-    constructor(props){
-        super(props);
-        console.log("its constructor",props);
-    }
+   
     componentDidMount() {
         this.renderCourse();
     }
@@ -31,7 +28,7 @@ class Courses extends React.Component {
             return item;
         })
         console.log(data); 
-        return this.props.addCourse(data);
+        return this.props.viewCourses(data);
     }
          render() {
              return (
@@ -83,15 +80,17 @@ function View(props) {
    
 
 
-const mapStateToProps = (state) => {   
+export const mapStateToProps = (state) => {   
         return {
-            value: state.value,
-            items: state.items
+            authors: state.authors,
+            items: state.items,
+            newCourse: state.newCourse
         }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-            addCourse: text => dispatch(addCourse(text))
+export const mapDispatchToProps = (dispatch) => ({
+    viewCourses: data => dispatch(viewCourses(data)),
+    addCourse: data => dispatch(addCourse(data))
     })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Courses);
