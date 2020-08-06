@@ -11,8 +11,9 @@ import thunk from 'redux-thunk';
 
  const defaultState = {
   authors: [],
-  items: [],
-  newCourse: []
+  courses: [],
+  newCourse: [],
+  redirect: null
 }
 
 const store = createStore(addCourseReducer,defaultState,applyMiddleware(thunk));

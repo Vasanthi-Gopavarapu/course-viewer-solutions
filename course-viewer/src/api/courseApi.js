@@ -14,6 +14,7 @@ export function saveCourse(course) {
     body: JSON.stringify(course)
   })
     .then(handleResponse)
+    .then(data => console.log(data))
     .catch(handleError);
 }
 

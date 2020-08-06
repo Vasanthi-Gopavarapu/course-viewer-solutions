@@ -11,6 +11,7 @@ import About from './About';
 import Addcourse from './Addcourse';
 
 
+
 function App() {
   return (
     <Router>
@@ -41,6 +42,9 @@ function App() {
             <About />
           </Route>
           <Route path="/course">
+            <Addcourse />
+          </Route>
+          <Route path="/course/:slug" >
             <Addcourse />
           </Route>
           <Route path="*">
