@@ -6,6 +6,12 @@ import { viewCourses, addCourse, addNewCourse, toggleRedirect, deleteCourse } fr
 import { getCourses } from './api/courseApi';
 import { getAuthors } from './api/authorApi';
 import { NavLink, Link } from 'react-router-dom';
+import { Button, Layout, Typography } from 'antd';
+import 'antd/dist/antd.css';
+
+const { Content } = Layout;
+
+const { Title } = Typography;
 
 class Courses extends React.Component {
    
@@ -33,15 +39,13 @@ class Courses extends React.Component {
     }
          render() {
              return (
-                <div>
-                  <h1>Courses</h1>
-                  <p><NavLink to="/course" className="text-primary"
-                                activeClassName="text-danger">
-                        <button type="button" className="btn btn-primary">
+                <Content>
+                  <Title>Courses</Title>
+                  <NavLink to="/course" >
+                        <Button type="primary" size='large' style={{marginBottom: 10}}>
                             Add Course
-                        </button>
+                        </Button>
                     </NavLink>
-                </p>
                   <table className="table">
                     <thead>
                         <tr>
@@ -56,7 +60,7 @@ class Courses extends React.Component {
                     <View params={this.props} ></View>
                     </tbody>
                     </table>
-               </div> 
+               </Content> 
             );
        
           }

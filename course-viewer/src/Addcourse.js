@@ -4,6 +4,12 @@ import { connect } from 'react-redux';
 import { mapStateToProps, mapDispatchToProps } from './Courses';
 import { Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router';
+import { Button, Layout, Typography, Form, Input, Select } from 'antd';
+import 'antd/dist/antd.css';
+
+const { Content } = Layout;
+
+const { Title } = Typography;
 
 class Addcourse extends React.Component {
         
@@ -34,9 +40,48 @@ class Addcourse extends React.Component {
             Heading = "Add Course"
        }
         return (
-            <div className="container">
-                <h1>{Heading}</h1>
-                <form ref={(ref) => {this.form = ref; }} onSubmit={(e) => {
+            <Content style={{width: "70%", paddinng: 20, marginLeft: 20}}>
+                <Title>{Heading}</Title>
+                <Form labelCol={{
+                            span: 4,
+                        }}
+                        onFinish={(values) => {
+                            
+                            let newCourse = {
+                                id: id? id: null,
+                                title: values.title,
+                                authorId: values.author,
+                                category: values.category
+                            };
+                            console.log(newCourse)
+                            // this.props.addNewCourse(newCourse);
+                        }}>
+                    <Form.Item label="Title"
+                     name="title"
+                     initialValue={title}>
+                        <Input />
+                    </Form.Item>
+                    <Form.Item label="Author"
+                     name="author"
+                     initialValue={authorId}>
+                        <Select>
+                            <Select.Option>Select Author</Select.Option>
+                            {this.props.authors.map(author => 
+                            <Select.Option key={author.id} value={author.name}> {author.name} </Select.Option>)}
+                        </Select>
+                    </Form.Item>
+                    <Form.Item label="Category"
+                     name="category"
+                     initialValue={category}>
+                        <Input />
+                    </Form.Item>
+                    <Form.Item >
+                        <Button type="primary" htmlType="submit">
+                        Save
+                        </Button>
+                    </Form.Item>
+                </Form>
+                {/* <form ref={(ref) => {this.form = ref; }} onSubmit={(e) => {
                 e.preventDefault();
                 let newCourse = {
                     id: id,
@@ -70,8 +115,8 @@ class Addcourse extends React.Component {
                     </div>
                     <button type="submit" className="btn btn-primary">
                      Save</button>
-                    </form>  
-            </div>
+                    </form>   */}
+            </Content>
         );
     }
     
