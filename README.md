@@ -32,7 +32,8 @@ $ npm start
 Terminal 2
 ```sh
 $ cd backend
-$ node mockData.js
+$ npm install json-server
+$ node createMockDb.js
 $ node apiServer.js
 ```
 
