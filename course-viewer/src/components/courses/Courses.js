@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import '../../App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
+import Viewcourses from "./Viewcourses";
 import { fetchCourses, addNewCourse, toggleRedirect, deletingCourse, fetchAuthors } from '../../actions/addCourse';
 import { NavLink, Link } from 'react-router-dom';
 import { Button, Layout, Typography } from 'antd';
@@ -52,7 +53,7 @@ class Courses extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <View params={data} onClick={this.props.deleteCourse}></View>
+                        <Viewcourses params={data} onClick={this.props.deleteCourse}></Viewcourses>
                     </tbody>
                 </table>
             </Content>
@@ -62,38 +63,7 @@ class Courses extends React.Component {
 
 }
 
-function View(props) {
-    let items = props.params;
-    const course = items.map((item, i) => {
-        let { slug } = item;
-        return (
-            <tr key={item.id}>
-                <td><span className="badge badge-light">Watch</span></td>
-                <td>
 
-                    <Link to={{
-                        pathname: `/course/${slug}`,
-                        query: {
-                            item
-                        }
-                    }} className="text-primary" >
-                        <span>{item.title}</span>
-                    </Link>
-
-                </td>
-                <td>{item.authorId}</td>
-                <td>{item.category}</td>
-                <td><button type="button" className="btn btn-outline-danger"
-                    onClick={() => {
-                        props.onClick(item.id);
-                    }}>Delete</button></td>
-            </tr>
-
-        );
-    }
-    );
-    return course;
-}
 
 
 export const mapStateToProps = (state) => {
