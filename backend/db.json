@@ -10,6 +10,7 @@
     {
       "id": 2,
       "title": "React: The Big Picture",
+      "slug": "react-big-picture",
       "authorId": 1,
       "category": "JavaScript"
     },
@@ -70,12 +71,18 @@
       "category": "HTML5"
     },
     {
-      "title": "ABC",
+      "id": 11,
+      "title": "ReduxJS",
       "authorId": 3,
-      "category": "EFG",
-      "createdAt": 1595873579148,
-      "slug": "abc",
-      "id": 11
+      "category": "Javascript Library"
+    },
+    {
+      "id": 12,
+      "title": "Web Development Application",
+      "authorId": 2,
+      "category": "Designation",
+      "createdAt": 1621266922001,
+      "slug": "web-development-application"
     }
   ],
   "authors": [

@@ -1,23 +1,38 @@
+import { getAuthors } from '../api/authorApi';
+import { getCourses, deleteCourse, saveCourse } from '../api/courseApi';
 
-
-export const addCourse = (authors) => {
-   return {
-    type:'ADD_COURSE',
-    authors
-  };
+export const fetchAuthors = () => {
+  return dispatch => {
+    getAuthors().then(data => {
+      return dispatch({
+        type: 'GET_AUTHORS',
+        authors: data
+      })
+    })
+  }
 }
 
-export const viewCourses = (courses) => {
-  return {
-    type: 'VIEW_COURSES',
-    courses
-  };
+export const fetchCourses = () => {
+  return dispatch => {
+    getCourses().then(data => {
+      return dispatch({
+        type: 'GET_COURSES',
+        courses: data
+      })
+    });
+  }
 }
 
 export const addNewCourse = (newCourse) => {
-  return {
-    type: 'ADD_NEW_COURSE',
-    newCourse
+  return dispatch => {
+    saveCourse(newCourse).then(data => {
+      console.log(data);
+      return dispatch({
+        type: 'ADD_NEW_COURSE',
+        newCourse
+      })
+    })
+
   }
 }
 
@@ -27,9 +42,13 @@ export const toggleRedirect = () => {
   }
 }
 
-export const deleteCourse = (id) => {
-  return {
-    type: 'DELETE',
-    id
+export const deletingCourse = (id) => {
+  return dispatch => {
+    deleteCourse(id).then(data =>
+      console.log(data))
+    dispatch({
+      type: 'DELETE',
+      id
+    });
   }
 }

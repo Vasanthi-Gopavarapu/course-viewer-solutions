@@ -9,21 +9,20 @@ import { createStore, applyMiddleware } from 'redux';
 import addCourseReducer from './reducers/addCourseReducer';
 import thunk from 'redux-thunk';
 
- const defaultState = {
+const defaultState = {
   authors: [],
   courses: [],
-  newCourse: [],
   redirect: null
 }
 
-const store = createStore(addCourseReducer,defaultState,applyMiddleware(thunk));
+const store = createStore(addCourseReducer, defaultState, applyMiddleware(thunk));
 
 ReactDOM.render(
- //<React.StrictMode>
+  //<React.StrictMode>
   <Provider store={store} >
     <App />
   </Provider>,
- //</React.StrictMode>,
+  //</React.StrictMode>,
   document.getElementById('root')
 );
 

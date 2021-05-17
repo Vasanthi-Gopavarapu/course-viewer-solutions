@@ -3,8 +3,8 @@ const baseUrl = "http://localhost:3001/courses/";
 
 export function getCourses() {
   return fetch(baseUrl)
-  .then(handleResponse)
-  .catch(handleError);
+    .then(handleResponse)
+    .catch(handleError);
 }
 
 export function saveCourse(course) {
@@ -14,7 +14,6 @@ export function saveCourse(course) {
     body: JSON.stringify(course)
   })
     .then(handleResponse)
-    .then(data => console.log(data))
     .catch(handleError);
 }
 

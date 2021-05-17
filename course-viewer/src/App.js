@@ -5,10 +5,10 @@ import './App.css';
 import { BrowserRouter as Router, NavLink, Route, Switch } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Home from './Home';
-import Courses from './Courses';
-import About from './About';
-import Addcourse from './Addcourse';
+import Home from './components/Home';
+import Courses from './components/courses/Courses';
+import About from './components/About';
+import Addcourse from './components/courses/Addcourse';
 
 
 
@@ -19,18 +19,18 @@ function App() {
         <nav>
           <ul className="nav">
             <li className="nav-item">
-              <NavLink exact to="/"  className="nav-link navigation-li" activeClassName="selected">Home
-              </NavLink> 
+              <NavLink exact to="/" className="nav-link navigation-li" activeClassName="selected">Home
+              </NavLink>
             </li><li className="nav-link">|</li>
             <li className="nav-item">
               <NavLink to="/courses" className="nav-link navigation-li" activeClassName="selected">Courses</NavLink>
             </li><li className="nav-link">|</li>
             <li className="nav-item">
-              <NavLink to="/about" className="nav-link navigation-li" activeClassName="selected">About</NavLink> 
+              <NavLink to="/about" className="nav-link navigation-li" activeClassName="selected">About</NavLink>
             </li>
           </ul>
-        </nav>        
-        
+        </nav>
+
         <Switch>
           <Route exact path="/">
             <Home />
@@ -50,10 +50,10 @@ function App() {
           <Route path="*">
             <Pagenotfound />
           </Route>
-        </Switch> 
-        </div>          
-   </Router>
-   
+        </Switch>
+      </div>
+    </Router>
+
   );
 }
 

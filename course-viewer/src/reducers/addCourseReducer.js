@@ -1,22 +1,23 @@
 import defaultState from '../index';
-import { saveCourse, deleteCourse } from '../api/courseApi';
 
-export default function addCourseReducer(state = defaultState, action){
-    switch(action.type) {
-        case 'VIEW_COURSES': 
-        return {...state, courses: action.courses};
-        case 'ADD_COURSE':
-        return {...state, authors: action.authors};
+export default function addCourseReducer(state = defaultState, action) {
+    switch (action.type) {
+        case 'GET_COURSES':
+            return { ...state, courses: action.courses };
+        case 'GET_AUTHORS':
+            return { ...state, authors: action.authors };
         case 'ADD_NEW_COURSE':
-            saveCourse(action.newCourse);
-        return {...state, newCourse: action.newCourse,redirect: 1};
+            return { ...state, redirect: 1 };
         case 'DELETE':
-            deleteCourse(action.id);
-            return {...state}
+            let newState = { ...state }
+            newState.courses = newState.courses.filter(course => {
+                return course.id !== action.id;
+            })
+            //console.log(newState);
+            return newState;
         case 'TOGGLE_REDIRECT':
-            return {...state, redirect: null}
+            return { ...state, redirect: null }
         default:
-        return state;    }
-   
-    
+            return { ...state };
+    }
 }
